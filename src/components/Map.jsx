@@ -10,7 +10,7 @@ function MapView() {
 
   useEffect(() => {
     fetchCurrentLocation();
-  }, []);
+  }, [fetchCurrentLocation]);
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
