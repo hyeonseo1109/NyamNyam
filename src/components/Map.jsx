@@ -1,36 +1,41 @@
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { useLocationStore, useSearch } from '../store';
-import { useEffect } from 'react';
-import { useState } from 'react';
-
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { useLocationStore, useSearch, useSearchResult } from "../store";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Marker } from "@react-google-maps/api";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
-const libraries = ['places'];
+const libraries = ["places"];
 
 function MapView() {
-  const {currentLocation, fetchCurrentLocation} = useLocationStore();
-  const searchContent = useSearch(state => state.searchContent);
+  const { currentLocation, fetchCurrentLocation } = useLocationStore();
+  const searchContent = useSearch((state) => state.searchContent);
   const [map, setMap] = useState(null);
+  const searchResult = useSearchResult((s) => s.searchResult);
+  const setSearchResult = useSearchResult((s) => s.setSearchResult);
 
+  //현재 사용자 위치 가져오기
   useEffect(() => {
     fetchCurrentLocation();
   }, [fetchCurrentLocation]);
 
+  //검색 입력어 들어오면 검색 요청함
   useEffect(() => {
-    if (!map) return; 
+    if (!map) return;
     if (!searchContent || searchContent.trim() === "") return;
     const service = new window.google.maps.places.PlacesService(map);
 
     const request = {
       query: searchContent,
-      fields: ['name', 'geometry', 'formatted_address', 'rating'],
+      fields: ["name", "geometry", "formatted_address", "rating"],
     };
 
     service.textSearch(request, (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        console.log('텍스트 검색 결과:', results);
+        setSearchResult(results);
+        // console.log('텍스트 검색 결과:', results);
       } else {
-        console.error('검색 실패:', status);
+        console.error("검색 실패:", status);
       }
     });
 
@@ -51,26 +56,38 @@ function MapView() {
     //     console.error('상세 정보 요청 실패:', status);
     //   }
     // });
-
   }, [map, searchContent]);
 
-  
+  useEffect(() => {
+    console.log(searchResult);
+  }, [searchResult]);
 
   return (
-    <LoadScript 
-      googleMapsApiKey={apiKey}
-      libraries={libraries}
-    >
+    <LoadScript googleMapsApiKey={apiKey} libraries={libraries}>
       <GoogleMap
         center={currentLocation}
-        mapContainerStyle={{ width: '100%', height: '100%' }}
+        mapContainerStyle={{ width: "100%", height: "100%" }}
         zoom={15}
-        onLoad={mapInstance => setMap(mapInstance)}
+        onLoad={(mapInstance) => setMap(mapInstance)}
       >
+        {searchResult.map((place) => {
+          if (!place.geometry || !place.geometry.location) return null;
+
+          return (
+            <Marker
+              key={place.place_id}
+              position={{
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng(),
+              }}
+              title={place.name}
+            />
+          );
+        })}
         {/* 마커, 기타 컴포넌트는 여기 안에 추가 */}
       </GoogleMap>
     </LoadScript>
   );
-};
+}
 
 export default MapView;

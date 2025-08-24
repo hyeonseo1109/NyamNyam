@@ -33,3 +33,8 @@ export const useSearch = create((set)=> ({
   searchContent: '',
   setSearchContent: (searchContent) => set({searchContent}),
 }))
+
+export const useSearchResult = create((set)=>({
+  searchResult: [],
+  setSearchResult: (searchResult) => set({searchResult}),
+}))
