@@ -28,3 +28,8 @@ export const useLocationStore = create((set) => ({
     }
   }
 }))
+
+export const useSearch = create((set)=> ({
+  searchContent: '',
+  setSearchContent: (searchContent) => set({searchContent}),
+}))
