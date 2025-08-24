@@ -80,7 +80,10 @@ function MapView() {
                 lat: place.geometry.location.lat(),
                 lng: place.geometry.location.lng(),
               }}
-              title={place.name}
+              icon={{
+                url: "/restaurantLocation.PNG",
+                scaledSize: new window.google.maps.Size(90, 90), // 크기 조절
+              }}
             />
           );
         })}
