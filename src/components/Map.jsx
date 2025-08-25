@@ -83,6 +83,7 @@ function MapView() {
               icon={{
                 url: "/restaurantLocation.PNG",
                 scaledSize: new window.google.maps.Size(90, 90), // 크기 조절
+                //---myLocation 추가---
               }}
             />
           );
