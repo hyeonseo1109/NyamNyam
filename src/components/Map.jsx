@@ -1,5 +1,5 @@
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
-import { useLocationStore, useSearch, useSearchResult } from "../store";
+import { useDetailPage, useDetailResult, useLocationStore, useSearch, useSearchResult } from "../store";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Marker } from "@react-google-maps/api";
@@ -13,6 +13,9 @@ function MapView() {
   const [map, setMap] = useState(null);
   const searchResult = useSearchResult((s) => s.searchResult);
   const setSearchResult = useSearchResult((s) => s.setSearchResult);
+  // const detailResult = useDetailResult((s)=> s.detailResult);
+  const setDetailResult = useDetailResult((s)=> s.setDetailResult);
+  const setIsDetailPage = useDetailPage((s)=>s.setIsDetailPage);
 
   //현재 사용자 위치 가져오기
   useEffect(() => {
@@ -71,10 +74,12 @@ function MapView() {
         zoom={15}
         onLoad={(mapInstance) => setMap(mapInstance)}
       >
+      
         {searchResult.map((place) => {
           if (!place.geometry || !place.geometry.location) return null;
 
           return (<>
+
             <Marker
               key={place.place_id}
               position={{
@@ -82,9 +87,13 @@ function MapView() {
                 lng: place.geometry.location.lng(),
               }}
               icon={{
-                url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png",
-                scaledSize: new window.google.maps.Size(50, 50), // 크기 조절
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                scaledSize: new window.google.maps.Size(70, 70), // 크기 조절
                 //---myLocation 추가---
+              }}
+              onClick={() => {
+                setDetailResult(place);
+                setIsDetailPage(true);
               }}
             />
             <Marker
@@ -94,7 +103,7 @@ function MapView() {
                 lng: Number(currentLocation.lng),
               }}
               icon={{
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                url: "/redDot.PNG",
                 scaledSize: new window.google.maps.Size(50, 50), // 크기 조절
               }}
             />

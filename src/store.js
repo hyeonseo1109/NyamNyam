@@ -38,3 +38,13 @@ export const useSearchResult = create((set)=>({
   searchResult: [],
   setSearchResult: (searchResult) => set({searchResult}),
 }))
+
+export const useDetailResult = create((set)=>({
+  detailResult: {},
+  setDetailResult: (detailResult)=> set({detailResult}),
+}))
+
+export const useDetailPage = create((set)=>({
+  isDetailPage: false,
+  setIsDetailPage: (isDetailPage)=> set({isDetailPage}),
+}))
