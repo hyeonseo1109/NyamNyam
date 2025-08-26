@@ -1,9 +1,10 @@
-import { useDetailResult } from "../store";
+import { useDetailPage, useDetailResult } from "../store";
 import { VscPinned } from "react-icons/vsc";
 
 
 export function Information () {
     const detailResult = useDetailResult((s)=> s.detailResult);
+    const setIsDetailPage = useDetailPage((s)=>s.setIsDetailPage);
     // const detailImageUrl = detailResult.photos?.[0].getUrl({ maxWidth: 300 });
     console.log(detailResult);
   
@@ -12,7 +13,9 @@ export function Information () {
       className="border border-gray-400 w-[50rem] h-[20rem] bg-[#fefefb]"
     >
       <div className="flex justify-between">
-        <div className="text-4xl">X</div>
+        <div 
+          onClick={()=>setIsDetailPage(false)}
+          className="text-4xl">X</div>
         <VscPinned size={50}/>
       </div>
       <div>
