@@ -17,6 +17,7 @@ function MapView() {
   //현재 사용자 위치 가져오기
   useEffect(() => {
     fetchCurrentLocation();
+    console.log("내 위치:", currentLocation);
   }, [fetchCurrentLocation]);
 
   //검색 입력어 들어오면 검색 요청함
@@ -59,7 +60,7 @@ function MapView() {
   }, [map, searchContent]);
 
   useEffect(() => {
-    console.log(searchResult);
+    console.log("검색 결과:", searchResult);
   }, [searchResult]);
 
   return (
@@ -73,7 +74,7 @@ function MapView() {
         {searchResult.map((place) => {
           if (!place.geometry || !place.geometry.location) return null;
 
-          return (
+          return (<>
             <Marker
               key={place.place_id}
               position={{
@@ -81,12 +82,24 @@ function MapView() {
                 lng: place.geometry.location.lng(),
               }}
               icon={{
-                url: "/restaurantLocation.PNG",
-                scaledSize: new window.google.maps.Size(90, 90), // 크기 조절
+                url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png",
+                scaledSize: new window.google.maps.Size(50, 50), // 크기 조절
                 //---myLocation 추가---
               }}
             />
-          );
+            <Marker
+              key={currentLocation.lat}
+              position={{
+                lat: Number(currentLocation.lat),
+                lng: Number(currentLocation.lng),
+              }}
+              icon={{
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                scaledSize: new window.google.maps.Size(50, 50), // 크기 조절
+              }}
+            />
+            
+          </>);
         })}
         {/* 마커, 기타 컴포넌트는 여기 안에 추가 */}
       </GoogleMap>
