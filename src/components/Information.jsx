@@ -10,7 +10,7 @@ export function Information () {
   
   return (<>
     <div
-      className="border border-gray-400 w-[50rem] h-[20rem] bg-[#fefefb]"
+      className="border border-gray-400 w-[50rem] h-[20rem] bg-[#fefefb] overflow-y-scroll"
     >
       <div className="flex justify-between">
         <div 
@@ -18,7 +18,7 @@ export function Information () {
           className="text-4xl">X</div>
         <VscPinned size={50}/>
       </div>
-      <div>
+      <div className="">
         <p>{detailResult.types}</p>
         <p className="text-5xl">{detailResult.name}</p>
         <p>{detailResult.formatted_address}</p>
@@ -28,11 +28,12 @@ export function Information () {
               : "종료"
             }
         </p>
-        <p>{detailResult.opening_hours.weekday_text}</p>
+        {detailResult.opening_hours?.weekday_text 
+        && detailResult.opening_hours.weekday_text.map((d, i)=> <p key={i}>{d}</p>)}
         <p>★{detailResult.rating}</p>
         <p>총 리뷰 {detailResult.user_ratings_total}개</p>
-        <p>{detailResult.reviews.map((r)=>r.text)}</p>
-
+        {detailResult.reviews?.length > 1
+        && detailResult.reviews.map((r, i)=><p key={i}>{r.text}</p>)}
       </div>
     </div>
   </>)
