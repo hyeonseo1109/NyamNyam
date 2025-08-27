@@ -48,3 +48,8 @@ export const useDetailPage = create((set)=>({
   isDetailPage: false,
   setIsDetailPage: (isDetailPage)=> set({isDetailPage}),
 }))
+
+export const useDetailPlaceId = create((set)=>({
+  detailPlaceId: null,
+  setDetailPlaceId: (detailPlaceId)=> set({detailPlaceId}),
+}))
