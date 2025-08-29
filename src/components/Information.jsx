@@ -1,33 +1,51 @@
 import { useDetailPage, useDetailResult } from "../store";
 import { VscPinned } from "react-icons/vsc";
 
+function translateType(type) {
+  switch(type) {
+    case "restaurant": return "#음식점";
+    case "cafe": return "#카페";
+    case "bar": return "#술집";
+    case "bakery": return "#베이커리";
+    case "meal_takeaway": return "#포장 전문";
+    case "meal_delivery": return "#배달";
+    case "food": return "#음식";
+    case "grocery_or_supermarket": return "#슈퍼마켓";
+    case "convenience_store": return "#편의점";
+  }
+}
 
 export function Information () {
     const detailResult = useDetailResult((s)=> s.detailResult);
     const setIsDetailPage = useDetailPage((s)=>s.setIsDetailPage);
     // const detailImageUrl = detailResult.photos?.[0].getUrl({ maxWidth: 300 });
     console.log("상세정보:", detailResult);
+
   
   return (<>
     <div
-      className="border border-gray-400 w-[50rem] h-[20rem] bg-[#fefefb] overflow-y-scroll"
+      className="border border-gray-400 w-[40rem] h-[20rem] bg-[#fefefb] overflow-y-scroll"
     >
       <div className="flex justify-between">
         <div 
           onClick={()=>setIsDetailPage(false)}
-          className="text-4xl">X</div>
-        <VscPinned size={50}/>
+          className="text-4xl absolute left-0 top-0">X</div>
+        <VscPinned 
+          size={50}
+          className="absolute right-1"
+        />
       </div>
-      <div className="">
-        <p>{detailResult.types}</p>
+      <div>
+        <div className="flex justify-center gap-3">
+          {detailResult.types && detailResult.types.map((t, i)=> <p key={i}>{translateType(t)}</p>)}
+        </div>
         <p className="text-5xl">{detailResult.name}</p>
         <p>{detailResult.formatted_address}</p>
-        <p>영업
-          {detailResult?.opening_hours?.isOpen()
-              ? "중"
-              : "종료"
-            }
+        
+        <p>
+          영업 {detailResult?.opening_hours?.isOpen() ? "중" : "종료"}
         </p>
+
         {detailResult.opening_hours?.weekday_text 
         && detailResult.opening_hours.weekday_text.map((d, i)=> <p key={i}>{d}</p>)}
         <p>★{detailResult.rating}</p>

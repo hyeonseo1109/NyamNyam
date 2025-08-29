@@ -49,7 +49,7 @@ function MapView() {
 
     const detailRequest = {
       placeId: detailPlaceId,
-      fields: ["place_id", "name", "types", "rating", "reviews", "user_ratings_total", "formatted_address", "opening_hours", "photos"],
+      fields: ["place_id", "name", "types", "rating", "reviews", "user_ratings_total", "formatted_address", "opening_hours", "opening_hours", "photos", "utc_offset_minutes"],
     };
 
     serviceRef.current.getDetails(detailRequest, (result, status) => {
