@@ -65,3 +65,8 @@ export const useLike = create((set)=> ({
   liked: false,
   setLiked: liked => set({ liked }),
 }))
+
+export const useMenu = create((set)=> ({
+  isMenu: false,
+  setIsMenu: isMenu => set({ isMenu }),
+}))

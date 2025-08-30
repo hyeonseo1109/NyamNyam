@@ -15,24 +15,16 @@ export default function Like () {
     try {
       if (!liked) {
         // 찜하기
-        await axios.post("http://3.35.209.203:3000/api/places/like", {
-          // userId,
-          restaurantId: detailResult.place_id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+        await axios.post("http://3.35.209.203:3000/api/places/like",
+          { restaurantId: detailResult.place_id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         setLiked(true);
       } else {
         // 찜 취소
         await axios.delete("http://3.35.209.203:3000/api/places/like", {
-          data: { restaurantId: detailResult.place_id },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
+          data: { restaurantId: detailResult.place_id }
         });
         setLiked(false);
       }
