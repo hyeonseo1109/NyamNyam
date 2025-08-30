@@ -1,5 +1,5 @@
 import { useDetailPage, useDetailResult } from "../store";
-import { VscPinned } from "react-icons/vsc";
+import Like from "./Like";
 
 function translateType(type) {
   switch(type) {
@@ -30,10 +30,7 @@ export function Information () {
         <div 
           onClick={()=>setIsDetailPage(false)}
           className="text-4xl absolute left-0 top-0">X</div>
-        <VscPinned 
-          size={50}
-          className="absolute right-1"
-        />
+        <Like/>
       </div>
       <div>
         <div className="flex justify-center gap-3">
@@ -41,7 +38,7 @@ export function Information () {
         </div>
         <p className="text-5xl">{detailResult.name}</p>
         <p>{detailResult.formatted_address}</p>
-        
+
         <p>
           영업 {detailResult?.opening_hours?.isOpen() ? "중" : "종료"}
         </p>
