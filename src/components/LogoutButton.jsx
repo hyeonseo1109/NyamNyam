@@ -10,7 +10,7 @@ export default function LogoutButton () {
 
   return (<>
     <button
-      className="bg-gray-200 px-2 rounded-[0.5rem] h-[1.5rem] flex items-center justify-center"
+      className="bg-gray-200 px-2 rounded-[0.5rem] h-[1.5rem] flex items-center justify-center w-[7rem]"
       onClick={handleLogout}
     >로그아웃</button>
   </>)

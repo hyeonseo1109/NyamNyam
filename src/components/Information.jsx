@@ -45,10 +45,14 @@ export function Information () {
 
         {detailResult.opening_hours?.weekday_text 
         && detailResult.opening_hours.weekday_text.map((d, i)=> <p key={i}>{d}</p>)}
-        <p>★{detailResult.rating}</p>
-        <p>총 리뷰 {detailResult.user_ratings_total}개</p>
-        {detailResult.reviews?.length > 1
-        && detailResult.reviews.map((r, i)=><p key={i}>{r.text}</p>)}
+        <span>★{detailResult.rating}  / </span>
+        <span>(총 리뷰 {detailResult.user_ratings_total}개)</span>
+        <div>{detailResult.reviews?.length > 1
+        && detailResult.reviews.map((r, i)=>
+        <p 
+          key={i}
+          className="flex justify-start text-left"
+        >{i+1} - {r.text}</p>)}</div>
       </div>
     </div>
   </>)

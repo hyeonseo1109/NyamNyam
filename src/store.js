@@ -66,7 +66,14 @@ export const useLike = create((set)=> ({
   setLiked: liked => set({ liked }),
 }))
 
+// 메뉴 켤지
 export const useMenu = create((set)=> ({
   isMenu: false,
   setIsMenu: isMenu => set({ isMenu }),
+}))
+
+// 마이페이지 켤지
+export const useMyPage = create((set)=> ({
+  isMyPage: false,
+  setIsMyPage: isMyPage => set({ isMyPage }),
 }))
