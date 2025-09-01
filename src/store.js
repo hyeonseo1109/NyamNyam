@@ -66,6 +66,12 @@ export const useLike = create((set)=> ({
   setLiked: liked => set({ liked }),
 }))
 
+// 찜한 가게아이디
+export const useLikeId = create((set)=>({
+  likedId: null,
+  setLikedId: (likedId)=>set({likedId}),
+}))
+
 // 메뉴 켤지
 export const useMenu = create((set)=> ({
   isMenu: false,

@@ -1,6 +1,6 @@
 import { BsPin } from "react-icons/bs";
 import { MdPushPin } from "react-icons/md";
-import { useDetailResult, useLike } from "../store";
+import { useDetailResult, useLike, useLikeId } from "../store";
 import axios from "axios";
 
 
@@ -9,7 +9,10 @@ export default function Like () {
   const setLiked = useLike((s)=>s.setLiked);
   // const userId = localStorage.getItem("userId");
   const detailResult = useDetailResult((s)=>s.detailResult);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
+
+  const likedId = useLikeId((s)=>s.likedId);
+  console.log("token:", token);
 
   const toggleLike = async () => {
     try {
@@ -22,8 +25,8 @@ export default function Like () {
         setLiked(true);
       } else {
         // 찜 취소
-        await axios.delete("http://3.35.209.203:3000/api/places/like", {
-          headers: { Authorization: `Bearer ${token}` },
+        await axios.delete("http://3.35.209.203:3000/api/places/like", 
+          { headers: { Authorization: `Bearer ${token}` },
           data: { restaurantId: detailResult.place_id }
         });
         setLiked(false);
