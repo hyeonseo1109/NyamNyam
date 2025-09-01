@@ -1,35 +1,36 @@
 import { BsPin } from "react-icons/bs";
 import { MdPushPin } from "react-icons/md";
-import { useDetailResult, useLike, useLikeId } from "../store";
+import { useDetailResult, useLikeId } from "../store";
 import axios from "axios";
 
 
 export default function Like () {
-  const liked = useLike((s)=>s.liked);
-  const setLiked = useLike((s)=>s.setLiked);
+  // const liked = useLike((s)=>s.liked);
+  // const setLiked = useLike((s)=>s.setLiked);
   // const userId = localStorage.getItem("userId");
   const detailResult = useDetailResult((s)=>s.detailResult);
   const token = localStorage.getItem("accessToken");
 
   const likedId = useLikeId((s)=>s.likedId);
+  const setLikedId = useLikeId((s)=>s.setLikedId);
   console.log("token:", token);
 
   const toggleLike = async () => {
     try {
-      if (!liked) {
+      if (!likedId.includes(detailResult.place_id)) {
         // 찜하기
         await axios.post("http://3.35.209.203:3000/api/places/like",
           { restaurantId: detailResult.place_id },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        setLiked(true);
+        setLikedId([...likedId, detailResult.place_id]);
       } else {
         // 찜 취소
         await axios.delete("http://3.35.209.203:3000/api/places/like", 
           { headers: { Authorization: `Bearer ${token}` },
           data: { restaurantId: detailResult.place_id }
         });
-        setLiked(false);
+        setLikedId(likedId.filter(id => id !== detailResult.place_id));
       }
     } catch (err) {
       console.error(err.message);
@@ -38,10 +39,10 @@ export default function Like () {
   };
 
   return (<>
-  { liked ? 
+  { likedId.includes(detailResult.place_id) ? 
     <MdPushPin 
       onClick={toggleLike}
-      size={50}
+      size={52}
       className="absolute right-1"  
     />
     : 

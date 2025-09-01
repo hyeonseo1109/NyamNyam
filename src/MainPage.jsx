@@ -19,6 +19,8 @@ function MainPage() {
   const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
+    if (!token) return;  
+
     const fetchLikedPlaces = async () => {
       try {
         const res = await axios.get("http://3.35.209.203:3000/api/places/like", {
@@ -32,7 +34,7 @@ function MainPage() {
     };
 
     fetchLikedPlaces();
-  }, []);
+  }, [token]);
 
   useEffect(()=>{
     console.log("찜한 가게 아이디:", likedId);
