@@ -27,8 +27,17 @@ function MapView() {
   const [map, setMap] = useState(null);
   const serviceRef = useRef(null);
 
+  
   const sortedSearchResult = Sort(searchResult);
-  const sortedlikedIdResult = Sort(likedIdResult);
+  const sortedLikedIdResult = Sort(likedIdResult);
+
+  const isOpenSortSearchResult = sortIsOpen
+  ? sortedSearchResult.filter((res) => res.opening_hours?.open_now === true)
+  : sortedSearchResult;
+
+  const isOpenSortLikedIdResult = sortIsOpen
+  ? sortedLikedIdResult.filter((res) => res.opening_hours?.open_now === true)
+  : sortedLikedIdResult;
 
   // 현재 사용자 위치
   useEffect(() => {
@@ -120,7 +129,7 @@ function MapView() {
       onLoad={onMapLoad}
     >
       {/* 검색 결과 마커 */}
-      {!isMyPage ? sortedSearchResult.map((place) => {
+      {!isMyPage ? isOpenSortSearchResult.map((place) => {
         if (!place.geometry?.location) return null;
         return (
           <Marker
@@ -141,7 +150,7 @@ function MapView() {
         );
       })
     :
-    sortedlikedIdResult.map((place) => {
+    isOpenSortLikedIdResult.map((place) => {
         if (!place.geometry?.location) return null;
         return (
           <Marker
