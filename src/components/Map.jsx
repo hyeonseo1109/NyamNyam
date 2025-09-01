@@ -1,5 +1,5 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import { useDetailPage, useDetailPlaceId, useDetailResult, useLikedIdResult, useLikeId, useLocationStore, useMyPage, useSearch, useSearchResult, useSortIsOpen } from "../store";
+import { useDetailPage, useDetailPlaceId, useDetailResult, useLikedIdResult, useLikeId, useLocationStore, useMyPage, useSearch, useSearchResult } from "../store";
 import { useEffect, useRef, useState } from "react";
 import { Sort } from "./Sort";
 
@@ -19,25 +19,13 @@ function MapView() {
   const likedIdResult = useLikedIdResult((s)=>s.likedIdResult);
   const setLikedIdResult = useLikedIdResult((s)=>s.setLikedIdResult);
 
-  const sortIsOpen = useSortIsOpen(s=>s.sortIsOpen);
-  // const setSortIsOpen = useSortIsOpen(s=>s.setSortIsOpen);
-
   const isMyPage = useMyPage((s)=> s.isMyPage);
 
   const [map, setMap] = useState(null);
   const serviceRef = useRef(null);
 
-  
   const sortedSearchResult = Sort(searchResult);
-  const sortedLikedIdResult = Sort(likedIdResult);
-
-  const isOpenSortSearchResult = sortIsOpen
-  ? sortedSearchResult.filter((res) => res.opening_hours?.open_now === true)
-  : sortedSearchResult;
-
-  const isOpenSortLikedIdResult = sortIsOpen
-  ? sortedLikedIdResult.filter((res) => res.opening_hours?.open_now === true)
-  : sortedLikedIdResult;
+  const sortedlikedIdResult = Sort(likedIdResult);
 
   // 현재 사용자 위치
   useEffect(() => {
@@ -129,7 +117,7 @@ function MapView() {
       onLoad={onMapLoad}
     >
       {/* 검색 결과 마커 */}
-      {!isMyPage ? isOpenSortSearchResult.map((place) => {
+      {!isMyPage ? sortedSearchResult.map((place) => {
         if (!place.geometry?.location) return null;
         return (
           <Marker
@@ -150,7 +138,7 @@ function MapView() {
         );
       })
     :
-    isOpenSortLikedIdResult.map((place) => {
+    sortedlikedIdResult.map((place) => {
         if (!place.geometry?.location) return null;
         return (
           <Marker
