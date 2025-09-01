@@ -36,6 +36,7 @@ export function Nav () {
         onClick={()=>
           setIsMenu(!isMenu)
         }
+        className="cursor-pointer"
       />
       { isMenu && <Menu/>}
       
@@ -47,12 +48,14 @@ export function Nav () {
         <IoPersonCircleOutline 
           size={30}
           onClick={()=>setIsMyPage(!isMyPage)}
+          className="cursor-pointer"
         />
       : 
       <AiOutlineClose 
         onClick={()=> {
           setIsMyPage(!isMyPage)
         }}
+        className="cursor-pointer"
       />}
     </div>
   </div>

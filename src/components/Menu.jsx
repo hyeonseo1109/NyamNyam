@@ -20,26 +20,26 @@ export default function Menu () {
       <div className="flex flex-col bg-[#fefefb] border w-[12rem] h-auto fixed z-10 gap-5 py-5">
         <div
           onClick={()=>setRatingFirst(!ratingFirst)}
-          className={`${ratingFirst && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto`}
+          className={`${ratingFirst && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto cursor-pointer`}
         >★4.0 이상</div>
         
         <div
           onClick={()=>setRatingSecond(!ratingSecond)}
-          className={`${ratingSecond && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto`}
+          className={`${ratingSecond && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto cursor-pointer`}
 
         >★3.5 이상</div>
         <div
           onClick={()=>setReviewFirst(!reviewFirst)}
-          className={`${reviewFirst && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto`}
+          className={`${reviewFirst && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto cursor-pointer`}
 
         >✍︎리뷰 100개 이상</div>
         <div
           onClick={()=>setReviewSecond(!reviewSecond)}
-          className={`${reviewSecond && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto`}
+          className={`${reviewSecond && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto cursor-pointer`}
         >✍︎리뷰 50개 이상</div>
         <div 
           onClick={()=>setSortIsOpen(!sortIsOpen)}
-          className={`${sortIsOpen && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto`}
+          className={`${sortIsOpen && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto cursor-pointer`}
         >영업 중</div>
       </div>
   </>)

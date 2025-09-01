@@ -29,7 +29,7 @@ export function Information () {
       <div className="flex justify-between">
         <div 
           onClick={()=>setIsDetailPage(false)}
-          className="text-4xl absolute left-0 top-0">X</div>
+          className="text-4xl absolute left-0 top-0 cursor-pointer">X</div>
         <Like/>
       </div>
       <div>

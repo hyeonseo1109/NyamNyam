@@ -43,13 +43,13 @@ export default function Like () {
     <MdPushPin 
       onClick={toggleLike}
       size={52}
-      className="absolute right-1"  
+      className="absolute right-1 cursor-pointer"  
     />
     : 
     <BsPin
       onClick={toggleLike}
       size={50}
-      className="absolute right-1"
+      className="absolute right-1 cursor-pointer"
     /> 
   }
   </>)
