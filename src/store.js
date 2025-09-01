@@ -89,3 +89,25 @@ export const useMyPage = create((set)=> ({
   isMyPage: false,
   setIsMyPage: isMyPage => set({ isMyPage }),
 }))
+
+
+// 리뷰 조건
+export const useSortReviewFirst = create((set)=> ({
+  reviewFirst: false,
+  setReviewFirst: (reviewFirst)=>set({reviewFirst}),
+}));
+
+export const useSortReviewSecond = create((set)=> ({
+  reviewSecond: false,
+  setReviewSecond: (reviewSecond)=>set({reviewSecond}),
+}));
+
+export const useSortRatingFirst = create((set)=> ({
+  ratingFirst: false,
+  setRatingFirst: (ratingFirst)=>set({ratingFirst}),
+}));
+
+export const useSortRatingSecond = create((set)=> ({
+  ratingSecond: false,
+  setRatingSecond: (ratingSecond)=>set({ratingSecond}),
+}))

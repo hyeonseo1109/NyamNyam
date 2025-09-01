@@ -1,14 +1,54 @@
-// export function Sort () {
-//   return (<div>
-//     <div className="flex gap-5">
-//       <div className="bg-gray-200 rounded-sm px-1">★4.0 이상</div>
-//       <div className="bg-gray-200 rounded-sm px-1">★3.5 이상</div>
-//       <div className="bg-gray-200 rounded-sm px-1">✍︎리뷰 100개 이상</div>
-//     </div>
+import {
+  useSortRatingFirst, 
+  useSortRatingSecond, 
+  useSortReviewFirst, 
+  useSortReviewSecond 
+} from "../store";
 
-//     <div className="flex gap-5">
-//       <div className="bg-gray-200 rounded-sm px-1">영업 중</div>
-//       <div className="bg-gray-200 rounded-sm px-1">음식 종류</div>
-//     </div>
-//   </div>)
-// }
+
+export function Sort (data) {
+  const reviewFirst = useSortReviewFirst((s)=>s.reviewFirst);
+  const reviewSecond = useSortReviewSecond((s)=>s.reviewSecond);
+  const ratingFirst = useSortRatingFirst((s)=>s.ratingFirst);
+  const ratingSecond = useSortRatingSecond((s)=>s.reviewFirst);
+
+  if(!reviewFirst && !reviewSecond && !ratingFirst && !ratingSecond) {
+    return data;
+  }
+
+
+  if(ratingFirst && reviewFirst) {
+    return [...data].filter((m)=>m.rating >= 4).filter((m)=>m.user_ratings_total > 100);
+  }
+
+  if(ratingFirst && reviewSecond) {
+    return [...data].filter((m)=>m.rating >= 4).filter((m)=>m.user_ratings_total > 50);
+  }
+
+  if(ratingSecond && reviewFirst) {
+    return [...data].filter((m)=>m.rating >= 3.5).filter((m)=>m.user_ratings_total > 100);
+  }
+
+  if(ratingSecond && reviewSecond) {
+    return [...data].filter((m)=>m.rating >= 3.5).filter((m)=>m.user_ratings_total > 50);
+  }
+
+
+  if(ratingFirst) {
+    return [...data].filter((m)=>m.rating >= 4);
+  }
+
+  if(ratingSecond) {
+    return [...data].filter((m)=>m.rating >= 3.5);
+  }
+
+  if(reviewFirst) {
+    return [...data].filter((m)=>m.user_ratings_total > 100);
+  }
+
+  if(reviewSecond) {
+    return [...data].filter((m)=>m.user_ratings_total > 50);
+  }
+
+  return data;
+}

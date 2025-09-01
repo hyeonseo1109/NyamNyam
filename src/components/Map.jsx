@@ -1,6 +1,8 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useDetailPage, useDetailPlaceId, useDetailResult, useLikedIdResult, useLikeId, useLocationStore, useMyPage, useSearch, useSearchResult } from "../store";
 import { useEffect, useRef, useState } from "react";
+import { Sort } from "./Sort";
+
 
 function MapView() {
   const { currentLocation, fetchCurrentLocation } = useLocationStore();
@@ -78,7 +80,7 @@ function MapView() {
         const detailRequest = {
           placeId: id,
           fields: [
-            "place_id", "name", "types","rating","reviews",            "user_ratings_total","formatted_address","opening_hours","photos","utc_offset_minutes","geometry"
+            "place_id", "name", "types","rating","reviews", "user_ratings_total","formatted_address","opening_hours","photos","utc_offset_minutes","geometry"
           ],
         };
 
@@ -112,7 +114,7 @@ function MapView() {
       onLoad={onMapLoad}
     >
       {/* 검색 결과 마커 */}
-      {!isMyPage ? searchResult.map((place) => {
+      {!isMyPage ? Sort(searchResult).map((place) => {
         if (!place.geometry?.location) return null;
         return (
           <Marker
@@ -123,7 +125,7 @@ function MapView() {
             }}
             icon={{
               url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-              scaledSize: new window.google.maps.Size(70, 70),
+              scaledSize: new window.google.maps.Size(60, 60),
             }}
             onClick={() => {
               setDetailPlaceId(place.place_id);
@@ -133,7 +135,7 @@ function MapView() {
         );
       })
     :
-    likedIdResult.map((place) => {
+    Sort(likedIdResult).map((place) => {
         if (!place.geometry?.location) return null;
         return (
           <Marker
@@ -144,7 +146,7 @@ function MapView() {
             }}
             icon={{
               url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png",
-              scaledSize: new window.google.maps.Size(70, 70),
+              scaledSize: new window.google.maps.Size(60, 60),
             }}
             onClick={() => {
               setDetailPlaceId(place.place_id);
