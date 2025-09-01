@@ -68,8 +68,14 @@ export const useLike = create((set)=> ({
 
 // 찜한 가게아이디
 export const useLikeId = create((set)=>({
-  likedId: null,
+  likedId: [],
   setLikedId: (likedId)=>set({likedId}),
+}))
+
+// 찜한 가게들 상세정보 핀
+export const useLikedIdResult = create((set)=> ({
+  likedIdResult: [], 
+  setLikedIdResult: likedIdResult=> set({likedIdResult}),
 }))
 
 // 메뉴 켤지

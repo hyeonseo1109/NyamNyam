@@ -1,5 +1,5 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import { useDetailPage, useDetailPlaceId, useDetailResult, useLocationStore, useSearch, useSearchResult } from "../store";
+import { useDetailPage, useDetailPlaceId, useDetailResult, useLikedIdResult, useLikeId, useLocationStore, useMyPage, useSearch, useSearchResult } from "../store";
 import { useEffect, useRef, useState } from "react";
 
 function MapView() {
@@ -12,6 +12,12 @@ function MapView() {
   const setIsDetailPage = useDetailPage((s) => s.setIsDetailPage);
   const detailPlaceId = useDetailPlaceId((s)=> s.detailPlaceId);
   const setDetailPlaceId = useDetailPlaceId((s)=> s.setDetailPlaceId);
+
+  const likedId = useLikeId((s)=> s.likedId);
+  const likedIdResult = useLikedIdResult((s)=>s.likedIdResult);
+  const setLikedIdResult = useLikedIdResult((s)=>s.setLikedIdResult);
+
+  const isMyPage = useMyPage((s)=> s.isMyPage);
 
   const [map, setMap] = useState(null);
   const serviceRef = useRef(null);
@@ -61,6 +67,43 @@ function MapView() {
     });
   }, [detailPlaceId, setDetailResult]);
 
+  //찜리스트에서 가게Id로 검색해서 정보 가져오기
+  useEffect(() => {
+    if ( !isMyPage && likedId?.length === 0) return;
+
+    const fetchDetails = async () => {
+      const results = [];
+
+      for (const id of likedId) {
+        const detailRequest = {
+          placeId: id,
+          fields: [
+            "place_id", "name", "types","rating","reviews",            "user_ratings_total","formatted_address","opening_hours","photos","utc_offset_minutes","geometry"
+          ],
+        };
+
+        await new Promise((resolve) => {
+          serviceRef.current.getDetails(detailRequest, (result, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+              results.push(result);
+            } else {
+              console.error("상세 정보 요청 실패:", status);
+            }
+            resolve();
+          });
+        });
+      }
+
+      setLikedIdResult(results);
+    };
+
+    fetchDetails();
+  }, [likedId, setLikedIdResult, isMyPage]);
+
+  useEffect(()=>{
+    console.log("찜한 가게 상세정보 목록:", likedIdResult);
+  }, [likedIdResult])
+
   return (
     <GoogleMap
       center={currentLocation}
@@ -69,7 +112,7 @@ function MapView() {
       onLoad={onMapLoad}
     >
       {/* 검색 결과 마커 */}
-      {searchResult.map((place) => {
+      {!isMyPage ? searchResult.map((place) => {
         if (!place.geometry?.location) return null;
         return (
           <Marker
@@ -80,6 +123,27 @@ function MapView() {
             }}
             icon={{
               url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+              scaledSize: new window.google.maps.Size(70, 70),
+            }}
+            onClick={() => {
+              setDetailPlaceId(place.place_id);
+              setIsDetailPage(true);
+            }}
+          />
+        );
+      })
+    :
+    likedIdResult.map((place) => {
+        if (!place.geometry?.location) return null;
+        return (
+          <Marker
+            key={place.place_id}
+            position={{
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
+            }}
+            icon={{
+              url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png",
               scaledSize: new window.google.maps.Size(70, 70),
             }}
             onClick={() => {
