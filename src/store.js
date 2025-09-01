@@ -111,3 +111,8 @@ export const useSortRatingSecond = create((set)=> ({
   ratingSecond: false,
   setRatingSecond: (ratingSecond)=>set({ratingSecond}),
 }))
+
+export const useSortIsOpen = create((set)=> ({
+  sortIsOpen: false,
+  setSortIsOpen: (sortIsOpen)=>set({sortIsOpen}),
+}))

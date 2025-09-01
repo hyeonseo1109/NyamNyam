@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   useSortRatingFirst, 
   useSortRatingSecond, 
@@ -10,7 +11,11 @@ export function Sort (data) {
   const reviewFirst = useSortReviewFirst((s)=>s.reviewFirst);
   const reviewSecond = useSortReviewSecond((s)=>s.reviewSecond);
   const ratingFirst = useSortRatingFirst((s)=>s.ratingFirst);
-  const ratingSecond = useSortRatingSecond((s)=>s.reviewFirst);
+  const ratingSecond = useSortRatingSecond((s)=>s.ratingSecond);
+
+  useEffect(()=>{
+    console.log("reviewFirst:", reviewFirst);
+  }, [reviewFirst]);
 
   if(!reviewFirst && !reviewSecond && !ratingFirst && !ratingSecond) {
     return data;
