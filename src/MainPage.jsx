@@ -22,7 +22,7 @@ function MainPage() {
 
     const fetchLikedPlaces = async () => {
       try {
-        const res = await axios.get("http://3.35.209.203:3000/api/places/like", {
+        const res = await axios.get("https://nyamnyam.r-e.kr/api/places/like", {
           headers: { Authorization: `Bearer ${token}` },
         });
         // 서버에서 { restaurantIds: [...] } 형식으로 내려옴

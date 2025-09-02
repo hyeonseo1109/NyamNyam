@@ -18,14 +18,14 @@ export default function Like () {
     try {
       if (!likedId.includes(detailResult.place_id)) {
         // 찜하기
-        await axios.post("http://3.35.209.203:3000/api/places/like",
+        await axios.post("https://nyamnyam.r-e.kr/api/places/like",
           { restaurantId: detailResult.place_id },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setLikedId([...likedId, detailResult.place_id]);
       } else {
         // 찜 취소
-        await axios.delete("http://3.35.209.203:3000/api/places/like", 
+        await axios.delete("https://nyamnyam.r-e.kr/api/places/like", 
           { headers: { Authorization: `Bearer ${token}` },
           data: { restaurantId: detailResult.place_id }
         });
