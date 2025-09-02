@@ -13,7 +13,6 @@ export default function Like () {
 
   const likedId = useLikeId((s)=>s.likedId);
   const setLikedId = useLikeId((s)=>s.setLikedId);
-  console.log("token:", token);
 
   const toggleLike = async () => {
     try {

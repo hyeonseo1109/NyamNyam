@@ -88,7 +88,7 @@ function MapView() {
         };
 
         await new Promise((resolve) => {
-          serviceRef.current.getDetails(detailRequest, (result, status) => {
+          serviceRef?.current.getDetails(detailRequest, (result, status) => {
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
               results.push(result);
             } else {

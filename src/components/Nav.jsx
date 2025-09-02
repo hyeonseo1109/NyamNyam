@@ -16,14 +16,6 @@ export function Nav () {
   
 
   useEffect(()=> {
-    console.log("메뉴상태:", isMenu)
-  }, [isMenu]);
-
-    useEffect(()=> {
-    console.log("마이페이지상태:", isMyPage)
-  }, [isMyPage]);
-
-  useEffect(()=> {
       setIsDetailPage(false);
   }, [isMyPage]);
 

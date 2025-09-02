@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDetailPage, useDetailResult } from "../store";
 import Like from "./Like";
 
@@ -20,11 +21,11 @@ export function Information () {
     const setIsDetailPage = useDetailPage((s)=>s.setIsDetailPage);
     // const detailImageUrl = detailResult.photos?.[0].getUrl({ maxWidth: 300 });
     console.log("상세정보:", detailResult);
-
+    const [page, setPage] = useState(0);
   
   return (<>
     <div
-      className="border border-gray-400 w-[40rem] h-[20rem] bg-[#fefefb] overflow-y-scroll"
+      className="border border-gray-400 w-[40rem] h-[20rem] bg-[#fefefb] overflow-y-scroll flex flex-col items-center"
     >
       <div className="flex justify-between">
         <div 
@@ -53,6 +54,25 @@ export function Information () {
           key={i}
           className="flex justify-start text-left"
         >{i+1} - {r.text}</p>)}</div>
+      </div>
+      <div className="w-[25rem] flex items-center gap-5 justify-start">
+        <div
+          onClick={()=>{
+            page>=1 && setPage(page-1)
+          }}
+          className="text-[3rem]">
+            ⟨
+          </div>
+        <img 
+          src={detailResult.photos?.[page].getUrl()}
+          className=""
+        />
+        <div
+          onClick={()=> page<detailResult.photos.length-1 && setPage(page+1)}
+          className="text-[3rem]"
+        >
+          ⟩
+        </div>
       </div>
     </div>
   </>)

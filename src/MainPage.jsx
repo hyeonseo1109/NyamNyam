@@ -14,7 +14,6 @@ function MainPage() {
   const isDetailPage = useDetailPage((s)=>s.isDetailPage);
 
   const setLikedId = useLikeId((s) => s.setLikedId); 
-  const likedId = useLikeId((s) => s.likedId); 
 
   const token = localStorage.getItem("accessToken");
 
@@ -36,9 +35,6 @@ function MainPage() {
     fetchLikedPlaces();
   }, [token]);
 
-  useEffect(()=>{
-    console.log("찜한 가게 아이디:", likedId);
-  }, [likedId]);
 
   return (
     <LoadScript googleMapsApiKey={apiKey} libraries={libraries} language="ko">
