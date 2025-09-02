@@ -32,7 +32,7 @@ export function SignInPage() {
   const signUpHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://api.nyamnyam.r-e.kr/auth/register", signUpForm);
+      const res = await axios.post("https://api.nyamnyam.r-e.kr/auth/register", signUpForm);
       console.log(res.data);
       alert("회원가입 성공");
     } catch (err) {
@@ -44,7 +44,7 @@ export function SignInPage() {
   const signInHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://api.nyamnyam.r-e.kr/auth/login", signInForm);
+      const res = await axios.post("https://api.nyamnyam.r-e.kr/auth/login", signInForm);
       // 로그인도 post로. DB 조회 후 JWT 토큰을 발급해주는 행위 → 리소스를 "생성"하는 성격
       //GET은 쿼리스트링에 노출되니 POST(body 안에 담기는 거)
       console.log(res.data);
