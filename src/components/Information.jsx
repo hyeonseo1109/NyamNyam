@@ -25,7 +25,7 @@ export function Information () {
   
   return (<>
     <div
-      className="border border-gray-400 w-[40rem] h-[20rem] bg-[#fefefb] overflow-y-scroll flex flex-col items-center"
+      className="border border-gray-400 w-[40rem] h-[35rem] bg-[#fefefb] overflow-y-scroll flex flex-col items-center"
     >
       <div className="flex justify-between">
         <div 
@@ -33,47 +33,56 @@ export function Information () {
           className="text-4xl absolute left-0 top-0 cursor-pointer">X</div>
         <Like/>
       </div>
-      <div>
+      <div className="flex flex-col justify-center">
         <div className="flex justify-center gap-3">
           {detailResult.types && detailResult.types.map((t, i)=> <p key={i}>{translateType(t)}</p>)}
         </div>
-        <p className="text-5xl">{detailResult.name}</p>
-        <p>{detailResult.formatted_address}</p>
+        <p className="text-5xl font-semibold">{detailResult.name}</p>
+        <div className="flex mx-auto">
+          <span>{detailResult.formatted_address}</span>
+          <span className={`${detailResult?.opening_hours?.isOpen() ? "text-blue-500" : "text-red-500"}`}>
+            &nbsp;&nbsp;(영업 {detailResult?.opening_hours?.isOpen() ? "중" : "종료"})
+          </span>
+        </div>
 
-        <p>
-          영업 {detailResult?.opening_hours?.isOpen() ? "중" : "종료"}
-        </p>
+        <div className="w-[25rem] flex items-center gap-5">
+          <div
+            onClick={()=>{
+              page>=1 && setPage(page-1)
+            }}
+            className="text-[3rem]">
+              ⟨
+          </div>
+          <img 
+            src={detailResult.photos?.[page].getUrl()}
+            className="rounded-[0.4rem]"
+          />
+          <div
+            onClick={()=> page<detailResult.photos.length-1 && setPage(page+1)}
+            className="text-[3rem]"
+          >
+            ⟩
+          </div>
+        </div>
 
         {detailResult.opening_hours?.weekday_text 
         && detailResult.opening_hours.weekday_text.map((d, i)=> <p key={i}>{d}</p>)}
-        <span>★{detailResult.rating}  / </span>
-        <span>(총 리뷰 {detailResult.user_ratings_total}개)</span>
-        <div>{detailResult.reviews?.length > 1
-        && detailResult.reviews.map((r, i)=>
-        <p 
-          key={i}
-          className="flex justify-start text-left"
-        >{i+1} - {r.text}</p>)}</div>
-      </div>
-      <div className="w-[25rem] flex items-center gap-5 justify-start">
-        <div
-          onClick={()=>{
-            page>=1 && setPage(page-1)
-          }}
-          className="text-[3rem]">
-            ⟨
-          </div>
-        <img 
-          src={detailResult.photos?.[page].getUrl()}
-          className=""
-        />
-        <div
-          onClick={()=> page<detailResult.photos.length-1 && setPage(page+1)}
-          className="text-[3rem]"
-        >
-          ⟩
+        <div className="text-[#fb0] font-bold">
+          <span>★{detailResult.rating}  &nbsp;/&nbsp; </span>
+          <span>(총 리뷰 {detailResult.user_ratings_total}개)</span>
+        </div>
+        <div className="flex flex-col gap-3 my-5">{detailResult.reviews?.length > 1
+          && detailResult.reviews.map((r, i)=>
+          <div 
+            key={i}
+            className="flex justify-start text-left border rounded-[0.4rem] p-2 bg-[#f0f0f0] flex-col"
+          >
+            <div className="border w-6 h-6 items-center justify-center flex rounded-[0.3rem] bg-[#c8c8c8]">{i+1}</div>
+            {r.text}
+          </div>)}
         </div>
       </div>
+      
     </div>
   </>)
 }

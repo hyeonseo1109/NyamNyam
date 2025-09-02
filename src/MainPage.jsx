@@ -38,10 +38,10 @@ function MainPage() {
 
   return (
     <LoadScript googleMapsApiKey={apiKey} libraries={libraries} language="ko">
-      <div className='border flex flex-col p-5 gap-5 '>
+      <div className='border flex flex-col p-5 gap-5 rounded-[0.4rem]'>
         <Nav/>
         <div className='flex justify-center'>
-          <div className='w-[40rem] h-[40rem] border-gray-400 border relative'>
+          <div className='w-[40rem] h-[60rem] border-gray-400 border relative'>
             <MapView/>
             { isDetailPage &&
               <div className="absolute bottom-0 z-10">
