@@ -1,7 +1,7 @@
 import { useDetailPage, useDetailPlaceId, useLikedIdResult } from "../store";
 import LogoutButton from "./LogoutButton";
 
-export default function MyPage () {
+function MyPage () {
   const likedIdResult = useLikedIdResult((s)=>s.likedIdResult);
   const setDetailPlaceId = useDetailPlaceId((s)=>s.setDetailPlaceId);
   const setIsDetailPage = useDetailPage((s)=>s.setIsDetailPage);
@@ -24,3 +24,5 @@ export default function MyPage () {
     </div>
   </>)
 }
+
+export default MyPage;
