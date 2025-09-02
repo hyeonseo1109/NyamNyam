@@ -7,6 +7,7 @@ import MyPage from "./Mypage";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { AiOutlineClose } from "react-icons/ai";
 
+
 export function Nav () {
   const setIsMenu = useMenu((s)=>s.setIsMenu);
   const isMenu = useMenu((s)=>s.isMenu);
