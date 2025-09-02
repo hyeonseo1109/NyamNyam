@@ -44,7 +44,7 @@ export function Information () {
             &nbsp;&nbsp;(영업 {detailResult?.opening_hours?.isOpen() ? "중" : "종료"})
           </span>
         </div>
-
+        { detailResult.photos && 
         <div className="w-[25rem] flex items-center gap-5 ml-20">
           <div
             onClick={()=>{
@@ -59,18 +59,26 @@ export function Information () {
           />
           <div
             onClick={()=> page<detailResult.photos.length-1 && setPage(page+1)}
-            className={`text-[3rem] ${page===detailResult.photos.length-1 ? 'text-gray-300' : 'text-gray-600'}`}>
+            className={`text-[3rem] ${page===detailResult.photos?.length-1 ? 'text-gray-300' : 'text-gray-600'}`}>
             ⟩
+            </div>
           </div>
-        </div>
+        }
 
-        {detailResult.opening_hours?.weekday_text 
-        && detailResult.opening_hours.weekday_text.map((d, i)=> <p key={i}>{d}</p>)}
+        <div className="my-4">
+          {detailResult.opening_hours?.weekday_text 
+          && detailResult.opening_hours.weekday_text.map((d, i)=> 
+            <p 
+              key={i}
+            >{d}</p>)}
+        </div>
+        <hr
+          className="my-5 mx-20 text-gray-400"/>
         <div className="text-[#fb0] font-bold">
           <span>★{detailResult.rating}  &nbsp;/&nbsp; </span>
           <span>(총 리뷰 {detailResult.user_ratings_total}개)</span>
         </div>
-        <div className="flex flex-col gap-3 my-5">{detailResult.reviews?.length > 1
+        <div className="flex flex-col gap-3 mb-7 mt-2 mx-6">{detailResult.reviews?.length > 1
           && detailResult.reviews.map((r, i)=>
           <div 
             key={i}
@@ -81,7 +89,6 @@ export function Information () {
           </div>)}
         </div>
       </div>
-      
-    </div>
+      </div>
   </>)
 }

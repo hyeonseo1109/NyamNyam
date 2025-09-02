@@ -44,6 +44,7 @@ export function Nav () {
         />
       : 
       <AiOutlineClose 
+        size={30}
         onClick={()=> {
           setIsMyPage(!isMyPage)
         }}
