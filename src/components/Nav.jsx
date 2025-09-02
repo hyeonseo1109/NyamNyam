@@ -3,9 +3,11 @@ import { useDetailPage, useMenu, useMyPage } from "../store";
 import { Search } from "./Search";
 import { MdOutlineMenu } from "react-icons/md";
 import Menu from "./Menu";
-import MyPage from "./Mypage";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { AiOutlineClose } from "react-icons/ai";
+import MyPage from "./My";
+
+
 
 export function Nav () {
   const setIsMenu = useMenu((s)=>s.setIsMenu);
