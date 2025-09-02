@@ -1,6 +1,8 @@
 import { useDetailPage, useDetailPlaceId, useLikedIdResult } from "../store";
 import LogoutButton from "./LogoutButton";
 
+//마이페이지
+
 function MyPage () {
   const likedIdResult = useLikedIdResult((s)=>s.likedIdResult);
   const setDetailPlaceId = useDetailPlaceId((s)=>s.setDetailPlaceId);

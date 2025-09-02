@@ -61,19 +61,20 @@ export function SignInPage() {
 
 
   return (<>
-    <div className="flex flex-col gap-5 my-5">
+    <div className="flex flex-col gap-5 my-5 bg-[#c2ccd8] p-30 rounded-[2rem] shadow-[0_0_0.4rem_#888]">
       
       <form 
-        className="flex flex-col bg-gray-100 p-5 gap-5 justify-center  rounded-[0.8rem]"
+        className="flex flex-col bg-gray-200 p-5 gap-5 justify-center  rounded-[0.8rem]"
         onSubmit={signInHandleSubmit}
       >
+        <h1>NyamNyam에 돌아오셨군요!</h1>
         <input 
           type="text" 
           placeholder="이메일"
           name="userEmail"
           value={signInForm.userEmail}
           onChange={signInHandleChange}
-          className="border rounded-[0.5rem] px-2 bg-[#ffffffe0] w-[13rem]"
+          className="rounded-[0.6rem] px-2 bg-[#ffffffe0] w-[15rem] h-[2rem]"
         ></input>
         <div className="flex ">
           <input 
@@ -82,32 +83,33 @@ export function SignInPage() {
             name="userPassword"
             value={signInForm.userPassword}
             onChange={signInHandleChange}
-            className="border  rounded-bl-[0.5rem] rounded-tl-[0.5rem] px-2 bg-[#ffffffe0]  w-[11.5rem]"
+            className=" rounded-bl-[0.6rem] rounded-tl-[0.6rem] px-2 bg-[#ffffffe0]  w-[13.5rem] h-[2rem]"
           ></input>
           <button 
             type="button"
             onClick={() => setPasswordShow(!passwordShow)}
-            className="border bg-[#f1f1f1e0] rounded-br-[0.5rem] rounded-tr-[0.5rem] w-[1.5rem] justify-center flex items-center ">{ !passwordShow ?
+            className="bg-[#f1f1f1e0] rounded-br-[0.6rem] rounded-tr-[0.6rem] w-[1.5rem] justify-center flex items-center ">{ !passwordShow ?
               <IoEyeOutline />
             : <IoEyeOffOutline />
             }</button>
         </div>
         <button 
-          className="bg-gray-300 rounded-[0.5rem]"
+          className="bg-gray-300 rounded-[0.6rem]  h-[2rem] hover:bg-[#b8bdc5]"
           type="submit">로그인</button>
       </form>
 
       <form 
-        className="flex flex-col bg-gray-100 p-5 gap-5 justify-center rounded-[0.8rem]"
+        className="flex flex-col bg-gray-200 p-5 gap-5 justify-center rounded-[0.8rem] "
         onSubmit={signUpHandleSubmit}
       >
+        <h1>NyamNyam이 처음이신가요?</h1>
         <input 
           type="text" 
           placeholder="이름"
           name="userName"
           value={signUpForm.userName}
           onChange={signUpHandleChange}
-          className="border rounded-[0.5rem] px-2 bg-[#ffffffe0] w-[13rem]"
+          className="rounded-[0.6rem] px-2 bg-[#ffffffe0] w-[15rem]  h-[2rem]"
         ></input>
         <input 
           type="text" 
@@ -115,7 +117,7 @@ export function SignInPage() {
           name="userPhone"
           value={signUpForm.userPhone}
           onChange={signUpHandleChange}
-          className="border rounded-[0.5rem] px-2 bg-[#ffffffe0] w-[13rem]"
+          className="rounded-[0.6rem] px-2 bg-[#ffffffe0] w-[15rem] h-[2rem]"
         ></input>
         <input 
           type="text" 
@@ -123,7 +125,7 @@ export function SignInPage() {
           name="userEmail"
           value={signUpForm.userEmail}
           onChange={signUpHandleChange}
-          className="border rounded-[0.5rem] px-2 bg-[#ffffffe0] w-[13rem]"
+          className="rounded-[0.6rem] px-2 bg-[#ffffffe0] w-[15rem] h-[2rem]"
         ></input>
         <div className="flex ">
           <input 
@@ -132,16 +134,19 @@ export function SignInPage() {
             name="userPassword"
             value={signUpForm.userPassword}
             onChange={signUpHandleChange}
-            className="border  rounded-bl-[0.5rem] rounded-tl-[0.5rem] px-2 bg-[#ffffffe0]  w-[11.5rem]"
+            className=" rounded-bl-[0.6rem] rounded-tl-[0.65rem] px-2 bg-[#ffffffe0]  w-[13.5rem] h-[2rem]"
           ></input>
           <button 
             type="button"
             onClick={() => setPasswordShow(!passwordShow)}
-            className="border bg-[#f1f1f1e0] rounded-br-[0.5rem] rounded-tr-[0.5rem] w-[1.5rem] justify-center flex items-center "><IoEyeOutline /></button>
+            className="bg-[#f1f1f1e0] rounded-br-[0.6rem] rounded-tr-[0.6rem] w-[1.5rem] justify-center flex items-center ">{ !passwordShow ?
+              <IoEyeOutline />
+            : <IoEyeOffOutline />
+            }</button>
         </div>
         
         <button 
-          className="bg-gray-300 rounded-[0.5rem]"
+          className="bg-gray-300 rounded-[0.6rem] h-[2rem] hover:bg-[#b8bdc5]"
           type="submit">회원가입</button>
       </form>
     </div>
