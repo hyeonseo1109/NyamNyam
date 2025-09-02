@@ -45,12 +45,12 @@ export function Information () {
           </span>
         </div>
 
-        <div className="w-[25rem] flex items-center gap-5">
+        <div className="w-[25rem] flex items-center gap-5 ml-20">
           <div
             onClick={()=>{
               page>=1 && setPage(page-1)
             }}
-            className="text-[3rem]">
+            className={`text-[3rem] ${page===0 ? 'text-gray-300' : 'text-gray-600'}`}>
               ⟨
           </div>
           <img 
@@ -59,8 +59,7 @@ export function Information () {
           />
           <div
             onClick={()=> page<detailResult.photos.length-1 && setPage(page+1)}
-            className="text-[3rem]"
-          >
+            className={`text-[3rem] ${page===detailResult.photos.length-1 ? 'text-gray-300' : 'text-gray-600'}`}>
             ⟩
           </div>
         </div>
