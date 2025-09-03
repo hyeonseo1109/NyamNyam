@@ -38,7 +38,7 @@ function MainPage() {
 
   return (
     <LoadScript googleMapsApiKey={apiKey} libraries={libraries} language="ko">
-      <div className='border flex flex-col p-5 gap-5 rounded-[0.4rem]  shadow-[0_0_1rem_#aaaaaa7f] m-10'>
+      <div className='border flex flex-col p-5 gap-5 rounded-[0.4rem] bg-[#c2ccd8] shadow-[0_0_1rem_#aaaaaa7f] m-10'>
         <Nav/>
         <div className='flex justify-center'>
           <div className='w-[40rem] h-[55rem] border-gray-400 border relative'>
