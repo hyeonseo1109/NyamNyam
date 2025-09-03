@@ -44,7 +44,7 @@ export function Nav() {
         <div className="flex gap-3">
           <Search />
           <div className="flex gap-10 relative">
-            <div className="absolute">
+            <div className="absolute z-100 right-0 top-11">
               {isMyPage && <MyPage />}  
             </div>
             {!isMyPage ? (
