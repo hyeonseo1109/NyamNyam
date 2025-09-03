@@ -7,54 +7,62 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { AiOutlineClose } from "react-icons/ai";
 import MyPage from "./My";
 
+export function Nav() {
+  const setIsMenu = useMenu((s) => s.setIsMenu);
+  const isMenu = useMenu((s) => s.isMenu);
+  const setIsMyPage = useMyPage((s) => s.setIsMyPage);
+  const isMyPage = useMyPage((s) => s.isMyPage);
+  const setIsDetailPage = useDetailPage((s) => s.setIsDetailPage);
 
-
-export function Nav () {
-  const setIsMenu = useMenu((s)=>s.setIsMenu);
-  const isMenu = useMenu((s)=>s.isMenu);
-  const setIsMyPage = useMyPage((s)=>s.setIsMyPage);
-  const isMyPage = useMyPage((s)=>s.isMyPage);
-  const setIsDetailPage = useDetailPage((s)=>s.setIsDetailPage);
-  
-
-  useEffect(()=> {
-      setIsDetailPage(false);
+  useEffect(() => {
+    setIsDetailPage(false);
   }, [isMyPage]);
 
+  return (
+    <>
+      <div className="flex gap-10 justify-between items-center">
+        <div className="flex gap-5 relative">
+          {/* 아이콘 + 로고 */}
+          <div className="flex gap-4 items-center h-auto relative">
+            <MdOutlineMenu
+              size={35}
+              onClick={() => setIsMenu(!isMenu)}
+              className="cursor-pointer"
+            />
+            <img src="public/longLogo.png" className="w-[13rem] h-[2.5rem]" />
 
-  return (<>
-  <div className="flex gap-10 justify-between">
-    <div>
-      <MdOutlineMenu 
-        size={30}
-        onClick={()=>
-          setIsMenu(!isMenu)
-        }
-        className="cursor-pointer"
-      />
-      { isMenu && <Menu/>}
-      
-    </div>
-    <div className="flex gap-10">
-      <Search/> 
-      { isMyPage && <MyPage/>}
-      { !isMyPage ? 
-        <IoPersonCircleOutline 
-          size={30}
-          onClick={()=>setIsMyPage(!isMyPage)}
-          className="cursor-pointer"
-        />
-      : 
-      <AiOutlineClose 
-        size={30}
-        onClick={()=> {
-          setIsMyPage(!isMyPage)
-        }}
-        className="cursor-pointer"
-      />}
-    </div>
-  </div>
+            {/* 드롭다운 메뉴 */}
+            {isMenu && (
+              <div className="absolute top-12 left-0 z-1000">
+                <Menu />
+              </div>
+            )}
+          </div>
+        </div>
 
-
-  </>)
+        {/* 오른쪽 영역 */}
+        <div className="flex gap-3">
+          <Search />
+          <div className="flex gap-10 relative">
+            <div className="absolute">
+              {isMyPage && <MyPage />}  
+            </div>
+            {!isMyPage ? (
+              <IoPersonCircleOutline
+                size={35}
+                onClick={() => setIsMyPage(!isMyPage)}
+                className="cursor-pointer"
+              />
+            ) : (
+              <AiOutlineClose
+                size={30}
+                onClick={() => setIsMyPage(!isMyPage)}
+                className="cursor-pointer"
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

@@ -17,7 +17,7 @@ export default function Menu () {
 
   return (<>
 
-      <div className="flex flex-col bg-[#ffffff] border w-[12rem] h-auto fixed z-10 gap-5 py-5 rounded-[0.4rem]">
+      <div className="flex flex-col bg-[#ffffff] border w-[12rem] h-auto  gap-5 py-5 rounded-[0.4rem]">
         <div
           onClick={()=>setRatingFirst(!ratingFirst)}
           className={`${ratingFirst && "bg-gray-200"} w-[9.5rem] rounded-[0.4rem] mx-auto cursor-pointer`}
