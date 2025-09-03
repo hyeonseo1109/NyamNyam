@@ -29,7 +29,7 @@ export function Nav() {
               onClick={() => setIsMenu(!isMenu)}
               className="cursor-pointer"
             />
-            <img src="public/longLogo.png" className="w-[13rem] h-[2.5rem]" />
+            <img src="/longLogo.png" className="w-[13rem] h-[2.5rem]" />
 
             {/* 드롭다운 메뉴 */}
             {isMenu && (

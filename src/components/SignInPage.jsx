@@ -63,7 +63,7 @@ export function SignInPage() {
   return (<>
     <div className="flex flex-col gap-5 my-10 bg-[#c2ccd8] p-30 rounded-[2rem] shadow-[0_0_0.4rem_#888]">
       <img 
-        src='public/logo.png'
+        src='/logo.png'
         className="w-[15rem] mx-auto my-3"
       />
       
