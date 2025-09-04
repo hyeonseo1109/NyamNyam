@@ -7,6 +7,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 
 export function SignInPage() {
   const navigate = useNavigate();
+
   const [signUpForm, setSignUpForm] = useState({
     userEmail: "",
     userPassword: "",
@@ -29,8 +30,34 @@ export function SignInPage() {
     setSignInForm({ ...signInForm, [e.target.name]: e.target.value })
   }
 
+  const validateSignUp = () => {
+    const nameRegex = /^[가-힣a-zA-Z0-9]{2,8}$/;
+    const phoneRegex = /^\d{10,11}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
+    if (!nameRegex.test(signUpForm.userName)) {
+      return "이름은 2~8자의 한글, 영문, 숫자만 사용할 수 있습니다.";
+    }
+    if (!phoneRegex.test(signUpForm.userPhone)) {
+      return "전화번호는 숫자만 입력하며 10~11자리여야 합니다.";
+    }
+    if (!emailRegex.test(signUpForm.userEmail)) {
+      return "유효한 이메일 형식이 아닙니다.";
+    }
+    if (!passwordRegex.test(signUpForm.userPassword)) {
+      return "비밀번호는 6자 이상이며, 영문과 숫자를 포함해야 합니다.";
+    }
+    return null;
+  };
+
   const signUpHandleSubmit = async (e) => {
     e.preventDefault();
+    const error = validateSignUp();
+    if (error) {
+      alert(error);
+      return;
+    }
     try {
       const res = await axios.post("https://api.nyamnyam.r-e.kr/auth/register", signUpForm);
       console.log(res.data);

@@ -85,7 +85,10 @@ export function Information () {
             className="flex justify-start text-left border rounded-[0.4rem] p-2 bg-[#f0f0f0] flex-col"
           >
             <div className="border w-6 h-6 items-center justify-center flex rounded-[0.3rem] bg-[#c8c8c8]">{i+1}</div>
-            {r.text}
+            <span>{r?.author_name} (★{r?.rating})</span>
+            <span></span>
+            <span>{new Date(r?.time * 1000).toLocaleString()} ({r?.relative_time_description}) </span>
+            <span>{r?.text}</span>
           </div>)}
         </div>
       </div>
