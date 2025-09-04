@@ -21,7 +21,7 @@ function MyPage () {
               setIsDetailPage(true);
             }}
       >{result.name}</div>)
-      : <div>-</div>
+      : <div>-찜한 가게가 없습니다.-</div>
       }
     </div>
   </>)

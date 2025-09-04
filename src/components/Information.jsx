@@ -33,7 +33,7 @@ export function Information () {
           className="text-4xl absolute left-0 top-0 cursor-pointer">X</div>
         <Like/>
       </div>
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center items-center">
         <div className="flex justify-center gap-3">
           {detailResult.types && detailResult.types.map((t, i)=> <p key={i}>{translateType(t)}</p>)}
         </div>
@@ -45,7 +45,7 @@ export function Information () {
           </span>
         </div>
         { detailResult.photos && 
-        <div className="w-[25rem] flex items-center gap-5 ml-20">
+        <div className="w-[25rem] flex items-center gap-5 justify-center">
           <div
             onClick={()=>{
               page>=1 && setPage(page-1)
@@ -53,10 +53,12 @@ export function Information () {
             className={`text-[3rem] ${page===0 ? 'text-gray-300' : 'text-gray-600'}`}>
               ⟨
           </div>
-          <img 
-            src={detailResult.photos?.[page].getUrl()}
-            className="rounded-[0.4rem]"
-          />
+          <div className="flex justify-center mx-auto w-[25rem] h-[15rem] overflow-hidden">
+            <img 
+              src={detailResult.photos?.[page].getUrl()}
+              className="rounded-[0.4rem] w-full h-full object-cover"
+            />
+          </div>
           <div
             onClick={()=> page<detailResult.photos.length-1 && setPage(page+1)}
             className={`text-[3rem] ${page===detailResult.photos?.length-1 ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -78,8 +80,9 @@ export function Information () {
           <span>★{detailResult.rating}  &nbsp;/&nbsp; </span>
           <span>(총 리뷰 {detailResult.user_ratings_total}개)</span>
         </div>
-        <div className="flex flex-col gap-3 mb-7 mt-2 mx-6">{detailResult.reviews?.length > 1
-          && detailResult.reviews.map((r, i)=>
+        <div className="flex flex-col gap-3 mb-7 mt-2 mx-6">
+          {detailResult.reviews?.length > 1
+          ? (detailResult.reviews.map((r, i)=>
           <div 
             key={i}
             className="flex justify-start text-left border rounded-[0.4rem] p-2 bg-[#f0f0f0] flex-col"
@@ -89,7 +92,9 @@ export function Information () {
             <span></span>
             <span>{new Date(r?.time * 1000).toLocaleString()} ({r?.relative_time_description}) </span>
             <span>{r?.text}</span>
-          </div>)}
+          </div>))
+          : <div>불러올 수 있는 리뷰가 없습니다.</div>
+          }
         </div>
       </div>
       </div>

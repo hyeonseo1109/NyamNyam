@@ -31,7 +31,7 @@ export function Nav() {
             />
             <img src="/longLogo.png" className="w-[13rem] h-[2.5rem]" />
 
-            {/* 드롭다운 메뉴 */}
+            {/* 메뉴 */}
             {isMenu && (
               <div className="absolute top-12 left-0 z-1000">
                 <Menu />
@@ -40,13 +40,14 @@ export function Nav() {
           </div>
         </div>
 
-        {/* 오른쪽 영역 */}
         <div className="flex gap-3">
+          {/* 검색창 */}
           <Search />
           <div className="flex gap-10 relative">
             <div className="absolute z-100 right-0 top-11">
               {isMyPage && <MyPage />}  
             </div>
+            {/* 마이페이지 */}
             {!isMyPage ? (
               <IoPersonCircleOutline
                 size={35}
