@@ -169,7 +169,7 @@ function MapView() {
               lng: place.geometry.location.lng(),
             }}
             icon={{
-              url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png",
+              url: "http://maps.google.com/mapfiles/ms/icons/purple-dot.png",
               scaledSize: new window.google.maps.Size(isDetailPage&&place.place_id===detailPlaceId? 55 : 40, isDetailPage&&place.place_id===detailPlaceId? 55 : 40 ),
             }}
             onClick={() => {
