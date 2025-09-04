@@ -14,6 +14,7 @@ function MapView() {
   const setIsDetailPage = useDetailPage((s) => s.setIsDetailPage);
   const detailPlaceId = useDetailPlaceId((s)=> s.detailPlaceId);
   const setDetailPlaceId = useDetailPlaceId((s)=> s.setDetailPlaceId);
+  const isDetailPage = useDetailPage((s)=>s.isDetailPage);
 
   const likedId = useLikeId((s)=> s.likedId);
   const likedIdResult = useLikedIdResult((s)=>s.likedIdResult);
@@ -116,6 +117,26 @@ function MapView() {
       zoom={15}
       onLoad={onMapLoad}
     >
+      {/* {isDetailPage &&
+      sortedSearchResult.map((place)=> {
+        place.place_id===detailPlaceId
+        && map.panTo(place.geometry.location)})}; */}
+
+        {isMyPage
+        && sortedlikedIdResult.map((place) => {
+        if (!place.geometry?.location) return null;
+        if (place.place_id === detailPlaceId) {
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+          map.panTo({ lat, lng });
+    map.setZoom(17);
+
+    // 그 다음 화면을 아래로 150px 정도 밀기 → 마커가 위로 올라옴
+    window.google.maps.event.addListenerOnce(map, "idle", () => {
+      map.panBy(0, 200); 
+    });
+        } })}
+
       {/* 검색 결과 마커 */}
       {!isMyPage ? sortedSearchResult.map((place) => {
         if (!place.geometry?.location) return null;
@@ -128,7 +149,7 @@ function MapView() {
             }}
             icon={{
               url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-              scaledSize: new window.google.maps.Size(60, 60),
+              scaledSize: new window.google.maps.Size(40, 40),
             }}
             onClick={() => {
               setDetailPlaceId(place.place_id);
@@ -149,7 +170,7 @@ function MapView() {
             }}
             icon={{
               url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png",
-              scaledSize: new window.google.maps.Size(60, 60),
+              scaledSize: new window.google.maps.Size(isDetailPage&&place.place_id===detailPlaceId? 55 : 40, isDetailPage&&place.place_id===detailPlaceId? 55 : 40 ),
             }}
             onClick={() => {
               setDetailPlaceId(place.place_id);
@@ -167,7 +188,7 @@ function MapView() {
         }}
         icon={{
           url: "/redDot.PNG",
-          scaledSize: new window.google.maps.Size(50, 50),
+          scaledSize: new window.google.maps.Size(45, 45),
         }}
       />
     </GoogleMap>

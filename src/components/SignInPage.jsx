@@ -70,7 +70,7 @@ export function SignInPage() {
       });
     } catch (err) {
       console.error(err.message);
-      alert("회원가입 실패");
+      alert("중복된 이메일입니다! 다른 이메일을 사용해주세요.");
     }
   };
 
