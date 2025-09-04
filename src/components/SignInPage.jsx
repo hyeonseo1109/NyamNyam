@@ -61,7 +61,13 @@ export function SignInPage() {
     try {
       const res = await axios.post("https://api.nyamnyam.r-e.kr/auth/register", signUpForm);
       console.log(res.data);
-      alert("회원가입 성공");
+      alert("회원가입 성공! 로그인을 진행해주세요.");
+      setSignUpForm({
+        userEmail: "",
+        userPassword: "",
+        userName: "",
+        userPhone: "",
+      });
     } catch (err) {
       console.error(err.message);
       alert("회원가입 실패");
