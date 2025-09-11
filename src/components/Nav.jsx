@@ -32,7 +32,6 @@ export function Nav() {
             <img 
               src="/longLogo.png" 
               className="w-[13rem] h-[2.5rem]" 
-              // onClick={()=>map.panTo({ lat, lng })}
             />
 
             {/* 메뉴 */}

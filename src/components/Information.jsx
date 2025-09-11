@@ -91,7 +91,7 @@ export function Information () {
             <span>{r?.author_name} (★{r?.rating})</span>
             <span></span>
             <span>{new Date(r?.time * 1000).toLocaleString()} ({r?.relative_time_description}) </span>
-            <span>{r?.text}</span>
+            <span>{r?.text}</span> 
           </div>))
           : <div>불러올 수 있는 리뷰가 없습니다.</div>
           }
