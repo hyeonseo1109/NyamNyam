@@ -50,6 +50,7 @@ export function Nav() {
             <div className="absolute z-100 right-0 top-11">
               {isMyPage && <MyPage />}  
             </div>
+            
             {/* 마이페이지 */}
             {!isMyPage ? (
               <IoPersonCircleOutline
